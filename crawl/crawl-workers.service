@@ -1,0 +1,11 @@
+[Unit]
+Description=Crawl workers
+After=network-online.target
+
+[Service]
+WorkingDirectory=/opt/repos/firecrawl/apps/api
+ExecStart=/usr/local/bin/pnpm run workers
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

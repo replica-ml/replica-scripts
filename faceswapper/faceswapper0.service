@@ -1,0 +1,12 @@
+[Unit]
+Description=Faceswapper REST API
+After=network-online.target
+
+[Service]
+WorkingDirectory=/opt/repos/E4S2024
+ExecStart=/opt/conda/envs/e4s2024-new/bin/python -m e4s2024.rest_api
+Environment="PATH=/usr/local/cuda/bin:/opt/conda/envs/e4s2024-new/bin:/opt/conda/condabin:/usr/local/bin:/usr/bin:/bin"
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

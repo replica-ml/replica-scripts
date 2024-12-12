@@ -1,0 +1,11 @@
+[Unit]
+Description=serve-replica
+After=network-online.target
+
+[Service]
+Environment="DATABASE_URL=postgres://rest_user:rest_pass@localhost/rest_db"
+ExecStart=/opt/repos/serve-replica/target/release/serve-replica
+Restart=always
+
+[Install]
+WantedBy=multi-user.targe
