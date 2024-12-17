@@ -3,6 +3,22 @@ replica-scripts
 
 Mostly deployment scripts.
 
+  - Linux variants are useful in Docker, other image types [e.g., see Packer, Unikernels], and natively;
+  - macOS variant is useful for native usage;
+  - Windows—coming soon—is useful for Windows Containers, other image types, and natively.
+
+## Usage
+
+   ./setup.sh
+
+See [`conf.env.sh`](./conf.env.sh) for options that can be overriden by setting environment variables.
+
+### Docker usage
+
+For debugging, you might want to run something like:
+
+   docker build --file debian.Dockerfile --progress='plain' --no-cache --tag "${PWD##*/}":debian .
+
 <hr/>
 
 ## License

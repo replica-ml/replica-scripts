@@ -1,5 +1,16 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-sudo apt install -y postgresql-common
+if [ -n "$ZSH_VERSION" ] || [ -n "$BASH_VERSION" ]; then
+  set -euo pipefail
+fi
+
+ROOT="$( dirname -- $( dirname -- $( readlink -nf -- "$0" ) ) )"
+SCRIPT_ROOT_DIR="${SCRIPT_ROOT_DIR:-$ROOT}"
+
+# shellcheck disable=SC1091
+. "$SCRIPT_ROOT_DIR"'/conf.env.sh'
+. "$SCRIPT_ROOT_DIR"'/_apt/apt.sh'
+
+apt_depends postgresql-common
 sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh
-sudo apt install -y postgresql-server-dev-17 postgresql-17
+apt_depends postgresql-server-dev-"$POSTGRESQL_VERSION" postgresql-"$POSTGRESQL_VERSION"

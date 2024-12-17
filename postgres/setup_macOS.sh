@@ -10,6 +10,4 @@ SCRIPT_ROOT_DIR="${SCRIPT_ROOT_DIR:-$ROOT}"
 # shellcheck disable=SC1091
 . "$SCRIPT_ROOT_DIR"'/conf.env.sh'
 
-sudo mkdir /var/{run,log}/celery
-sudo adduser celery --home /home/celery/
-sudo chown -R celery:celery /var/{run,log}/celery
+brew install postgresql@"$POSTGRESQL_VERSION"
