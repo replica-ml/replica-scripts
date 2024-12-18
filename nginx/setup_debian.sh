@@ -9,6 +9,7 @@ SCRIPT_ROOT_DIR="${SCRIPT_ROOT_DIR:-$ROOT}"
 
 # shellcheck disable=SC1091
 . "$SCRIPT_ROOT_DIR"'/conf.env.sh'
+# shellcheck disable=SC1091
 . "$SCRIPT_ROOT_DIR"'/_apt/apt.sh'
 
 apt_depends curl gnupg2 ca-certificates lsb-release debian-archive-keyring
