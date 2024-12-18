@@ -11,7 +11,7 @@ SCRIPT_ROOT_DIR="${SCRIPT_ROOT_DIR:-$ROOT}"
 # shellcheck disable=SC1091
 . "$SCRIPT_ROOT_DIR"'/conf.env.sh'
 # shellcheck disable=SC1091
-. "$SCRIPT_ROOT_DIR"'/_git/git.sh'
+. "$SCRIPT_ROOT_DIR"'/_lib/_git/git.sh'
 
 target="$BUILD_DIR"'/firecrawl'
 git_get https://github.com/mendableai/firecrawl "$target"

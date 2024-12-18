@@ -9,7 +9,7 @@ SCRIPT_ROOT_DIR="${SCRIPT_ROOT_DIR:-$ROOT}"
 
 # shellcheck disable=SC1091
 . "$SCRIPT_ROOT_DIR"'/conf.env.sh'
-. "$SCRIPT_ROOT_DIR"'/_apt/apt.sh'
+. "$SCRIPT_ROOT_DIR"'/_lib/_os/_apt/apt.sh'
 
 apt_depends postgresql-common
 sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh

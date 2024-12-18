@@ -8,12 +8,12 @@ DIR="$( dirname -- "$( readlink -nf -- "$0" )")"
 export DIR
 
 # shellcheck disable=SC1091
-. "$DIR"'/_common/os_info.sh'
+. "$DIR"'/_lib/_common/os_info.sh'
 # shellcheck disable=SC1091
 . "$DIR"'/conf.env.sh'
 
 if [ "$POSTGRESQL_INSTALL" -eq 1 ]; then
-  "$DIR"'/postgres/setup.sh'
+  "$DIR"'/_lib/_storage/postgres/setup.sh'
 fi
 if [ -n "$DATABASE_URL" ]; then 
   >&2 printf 'DATABASE_URL must be set\n';
@@ -21,7 +21,7 @@ if [ -n "$DATABASE_URL" ]; then
 fi
 
 if [ "$VALKEY_INSTALL" -eq 1 ]; then
-  "$DIR"'/valkey/setup.sh'
+  "$DIR"'/_lib/_storage/valkey/setup.sh'
 fi
 if [ -n "$REDIS_URL" ]; then 
   >&2 printf 'REDIS_URL must be set\n';
@@ -29,17 +29,17 @@ if [ -n "$REDIS_URL" ]; then
 fi
 
 if [ "$RUST_INSTALL" -eq 1 ]; then
-  "$DIR"'/rust/setup.sh'
+  "$DIR"'/_lib/_toolchain/rust/setup.sh'
 fi
 if [ "$NODEJS_INSTALL" -eq 1 ]; then
-  "$DIR"'/nodejs/setup.sh'
+  "$DIR"'/_lib/_toolchain/nodejs/setup.sh'
 fi
 if [ "$PYTHON_INSTALL" -eq 1 ]; then
-  "$DIR"'/python/setup.sh'
+  "$DIR"'/_lib/_toolchain/python/setup.sh'
 fi
 
 if [ "$NGINX_INSTALL" -eq 1 ]; then
-  "$DIR"'/nginx/setup.sh'
+  "$DIR"'/_lib/_server/nginx/setup.sh'
 fi
 
 # uses `WWWROOT`

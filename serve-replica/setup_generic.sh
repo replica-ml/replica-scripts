@@ -11,12 +11,12 @@ SCRIPT_ROOT_DIR="${SCRIPT_ROOT_DIR:-$ROOT}"
 # shellcheck disable=SC1091
 . "$SCRIPT_ROOT_DIR"'/conf.env.sh'
 # shellcheck disable=SC1091
-. "$SCRIPT_ROOT_DIR"'/_common/common.sh'
+. "$SCRIPT_ROOT_DIR"'/_lib/_common/common.sh'
 # shellcheck disable=SC1091
-. "$SCRIPT_ROOT_DIR"'/_git/git.sh'
+. "$SCRIPT_ROOT_DIR"'/_lib/_git/git.sh'
 
 # shellcheck disable=SC1091
-. "$SCRIPT_ROOT_DIR"'/_rust/rust.sh'
+. "$SCRIPT_ROOT_DIR"'/_lib/_toolchain/_rust/rust.sh'
 
 ensure_available git
 
