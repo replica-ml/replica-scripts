@@ -15,7 +15,9 @@ export SCRIPT_ROOT_DIR="${SCRIPT_ROOT_DIR:-$ROOT}"
 
 os_setup_script="$DIR"'/setup_'"${TARGET_OS}"'.sh'
 if [ -f "$os_setup_script" ]; then
-  "$os_setup_script"
+  # shellcheck disable=SC1090
+  . "$os_setup_script"
 else
-  "$DIR"'/setup_generic.sh'
+  # shellcheck disable=SC1091
+  . "$DIR"'/setup_generic.sh'
 fi

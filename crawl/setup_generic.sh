@@ -10,10 +10,11 @@ SCRIPT_ROOT_DIR="${SCRIPT_ROOT_DIR:-$ROOT}"
 
 # shellcheck disable=SC1091
 . "$SCRIPT_ROOT_DIR"'/conf.env.sh'
+# shellcheck disable=SC1091
+. "$SCRIPT_ROOT_DIR"'/_git/git.sh'
 
 target="$BUILD_DIR"'/firecrawl'
-mkdir -p "$target"
-git clone --depth=1 --single-branch https://github.com/mendableai/firecrawl
+git_get https://github.com/mendableai/firecrawl "$target"
 # shellcheck disable=SC2164
 cd "$target"'/apps/api'
 cp ../../../../conf/.env .
