@@ -5,13 +5,18 @@ if [ -n "$ZSH_VERSION" ] || [ -n "$BASH_VERSION" ]; then
 fi
 
 previous_wd="$(pwd)"
-ROOT="$( dirname -- $( dirname -- $( readlink -nf -- "$0" ) ) )"
+ROOT="$( dirname -- "$( dirname -- "$( readlink -nf -- "$0" )" )" )"
 SCRIPT_ROOT_DIR="${SCRIPT_ROOT_DIR:-$ROOT}"
 
 # shellcheck disable=SC1091
 . "$SCRIPT_ROOT_DIR"'/conf.env.sh'
 
-apt_depends git
+case "$PKG_MGR" in
+  'apk') apk add git ;;
+  'apt-get') apt_depends git ;;
+  'dnf') dnf install git ;;
+  *) >&2 printf 'Unimplemented, package manager %s\n' "$PKG_MGR"
+esac
 
 target="$BUILD_DIR"'/serve-replica'
 mkdir -p "$target"
