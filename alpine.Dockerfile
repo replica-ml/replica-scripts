@@ -7,4 +7,4 @@ RUN ls -al && \
     apk add findutils && \
     find /scripts -not -path '*/.git/*' -type f && \
 #   . ./conf-no-all.env.sh && \
-    ./setup.sh
+    ./install.sh

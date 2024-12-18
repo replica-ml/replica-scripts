@@ -5,8 +5,7 @@ if [ -n "$ZSH_VERSION" ] || [ -n "$BASH_VERSION" ]; then
 fi
 
 previous_wd="$(pwd)"
-ROOT="$( dirname -- "$( dirname -- "$( readlink -nf -- "$0" )" )" )"
-SCRIPT_ROOT_DIR="${SCRIPT_ROOT_DIR:-$ROOT}"
+SCRIPT_ROOT_DIR="${SCRIPT_ROOT_DIR:-$( dirname -- "$( dirname -- "$( dirname -- "$0" )" )" )}"
 
 # shellcheck disable=SC1091
 . "$SCRIPT_ROOT_DIR"'/conf.env.sh'

@@ -1,7 +1,6 @@
 #!/bin/sh
 
-ROOT="$( dirname -- "$( dirname -- "$( readlink -nf -- "$0" )" )" )"
-SCRIPT_ROOT_DIR="${SCRIPT_ROOT_DIR:-$ROOT}"
+SCRIPT_ROOT_DIR="${SCRIPT_ROOT_DIR:-$( dirname -- "$( dirname -- "$( dirname -- "$0" )" )" )}"
 
 #DIR="$( dirname -- "$( readlink -nf -- "$0" )")"
 # shellcheck disable=SC1091
@@ -14,4 +13,8 @@ ensure_available() {
     'dnf') dnf install "$0" ;;
     *) >&2 printf 'Unimplemented, package manager %s\n' "$PKG_MGR"
   esac
+}
+
+cmd_avail() {
+  command -v "$1" 2>/dev/null
 }

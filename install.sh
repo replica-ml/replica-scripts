@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -v
+
 if [ -n "$ZSH_VERSION" ] || [ -n "$BASH_VERSION" ]; then
   set -euo pipefail
 fi
@@ -44,16 +46,16 @@ fi
 
 # uses `WWWROOT`
 if [ "$WWWROOT_INSTALL" -eq 1 ]; then
-  "$DIR"'/replica-ng/setup.sh'
+  "$DIR"'/app/replica-ng/setup.sh'
 fi
 
 # uses `FACESWAPPER_VENV`
 if [ "$FACESWAPPER_INSTALL" -eq 1 ]; then
-  "$DIR"'/faceswapper/setup.sh'
+  "$DIR"'/app/third_party/faceswapper/setup.sh'
 fi
 
 # uses `REDIS_URL` and `DATABASE_URL`
-"$DIR"'/serve-replica/setup.sh'
+"$DIR"'/app/first_party/serve-replica/setup.sh'
 
 # uses `FACESWAPPER_VENV` and `REDIS_URL`
-"$DIR"'/celery/setup.sh'
+"$DIR"'/app/_storage/celery/setup.sh'

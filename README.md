@@ -9,7 +9,7 @@ Mostly deployment scripts.
 
 ## Usage
 
-   ./setup.sh
+   ./install.sh
 
 See [`conf.env.sh`](./conf.env.sh) for options that can be overriden by setting environment variables.
 
@@ -18,6 +18,10 @@ See [`conf.env.sh`](./conf.env.sh) for options that can be overriden by setting 
 For debugging, you might want to run something like:
 
    docker build --file debian.Dockerfile --progress='plain' --no-cache --tag "${PWD##*/}":debian .
+
+## Developer setup
+
+`setup.sh` is common
 
 <hr/>
 

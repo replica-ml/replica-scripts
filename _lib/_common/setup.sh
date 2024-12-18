@@ -1,17 +1,17 @@
 #!/bin/sh
 
 if [ -n "$ZSH_VERSION" ] || [ -n "$BASH_VERSION" ]; then
-  set -euo pipefail
+  set -veuo pipefail
 fi
 
-DIR="$( dirname -- "$( readlink -nf -- "$0" )")"
+DIR="$( dirname -- "$0" )"
 export DIR
 
-ROOT="$( dirname -- "$( dirname -- "$( readlink -nf -- "$0" )" )" )"
-export SCRIPT_ROOT_DIR="${SCRIPT_ROOT_DIR:-$ROOT}"
+SCRIPT_ROOT_DIR="${SCRIPT_ROOT_DIR:-$( dirname -- "$(dirname -- "$( dirname -- "$DIR" )" )" )}"
+export SCRIPT_ROOT_DIR
 
 # shellcheck disable=SC1091
-. "$SCRIPT_ROOT_DIR"'/_common/os_info.sh'
+. "$SCRIPT_ROOT_DIR"'/_lib/_common/os_info.sh'
 
 os_setup_script="$DIR"'/setup_'"${TARGET_OS}"'.sh'
 if [ -f "$os_setup_script" ]; then
