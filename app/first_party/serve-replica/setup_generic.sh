@@ -15,7 +15,7 @@ SCRIPT_ROOT_DIR="${SCRIPT_ROOT_DIR:-$( dirname -- "$( dirname -- "$( dirname -- 
 . "$SCRIPT_ROOT_DIR"'/_lib/_git/git.sh'
 
 # shellcheck disable=SC1091
-. "$SCRIPT_ROOT_DIR"'/_lib/_toolchain/_rust/rust.sh'
+. "$SCRIPT_ROOT_DIR"'/_lib/_toolchain/rust/setup.sh'
 
 ensure_available git
 

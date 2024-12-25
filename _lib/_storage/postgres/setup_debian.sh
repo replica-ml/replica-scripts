@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 if [ -n "$ZSH_VERSION" ] || [ -n "$BASH_VERSION" ]; then
   set -euo pipefail

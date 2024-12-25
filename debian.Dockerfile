@@ -3,6 +3,5 @@ FROM debian:bookworm-slim
 COPY . /scripts
 WORKDIR /scripts
 
-RUN ls -al && \
+RUN ./install.sh
 #   . ./conf-no-all.env.sh && \
-    ./install.sh
