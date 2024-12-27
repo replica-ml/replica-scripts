@@ -10,7 +10,7 @@ get_priv() {
     elif command -v sudo 2>/dev/null; then
       PRIV='sudo';
     else
-      echo "Error: This script must be run as root or with sudo privileges."
+      >&2 echo "Error: This script must be run as root or with sudo privileges."
       exit 1
     fi
     export PRIV;

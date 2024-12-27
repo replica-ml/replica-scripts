@@ -54,8 +54,14 @@ if [ "$FACESWAPPER_INSTALL" -eq 1 ]; then
   "$DIR"'/app/third_party/faceswapper/setup.sh'
 fi
 
+if [ "$JUPYTER_NOTEBOOK_INSTALL" -eq 1 ]; then
+  "$DIR"'/app/third_party/faceswapper/setup.sh'
+fi
+
 # uses `REDIS_URL` and `DATABASE_URL`
 "$DIR"'/app/first_party/serve-replica/setup.sh'
 
 # uses `FACESWAPPER_VENV` and `REDIS_URL`
-"$DIR"'/app/_storage/celery/setup.sh'
+if [ "$CELERY_INSTALL" -eq 1 ]; then
+  "$DIR"'/app/_storage/celery/setup.sh'
+fi

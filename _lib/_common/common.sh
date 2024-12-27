@@ -6,6 +6,20 @@ SCRIPT_ROOT_DIR="${SCRIPT_ROOT_DIR:-$( dirname -- "$( dirname -- "$( dirname -- 
 # shellcheck disable=SC1091
 . "$SCRIPT_ROOT_DIR"'/_lib/_common/os_info.sh'
 
+get_priv() {
+    if [ -n "$PRIV" ]; then
+      true;
+    elif [ "$(id -u)" = "0" ]; then
+      PRIV='';
+    elif command -v sudo 2>/dev/null; then
+      PRIV='sudo';
+    else
+      >&2 echo "Error: This script must be run as root or with sudo privileges."
+      exit 1
+    fi
+    export PRIV;
+}
+
 ensure_available() {
   case "$PKG_MGR" in
     'apk') apk add "$0" ;;

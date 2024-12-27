@@ -13,6 +13,10 @@ export SCRIPT_ROOT_DIR
 # shellcheck disable=SC1091
 . "$SCRIPT_ROOT_DIR"'/_lib/_common/os_info.sh'
 
+env_script="$DIR"'/conf.env.sh'
+# shellcheck disable=SC1090
+[ -f "$env_script" ] && . "$env_script"
+
 os_setup_script="$DIR"'/setup_'"${TARGET_OS}"'.sh'
 if [ -f "$os_setup_script" ]; then
   # shellcheck disable=SC1090
