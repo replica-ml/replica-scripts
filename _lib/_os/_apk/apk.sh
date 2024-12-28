@@ -1,7 +1,7 @@
 #!/bin/sh
 
 is_installed() {
-   apk list --installed "$1"
+   apk list --installed "${1}"
 }
 
 

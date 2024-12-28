@@ -2,4 +2,4 @@
 
 curl -LsSf https://astral.sh/uv/install.sh | sh
 
-uv python install "$PYTHON_VERSION"
+uv python install "${PYTHON_VERSION}"

@@ -2,7 +2,7 @@
 
 if [ -z ${UNAME+x} ]; then
     UNAME="$(uname)"
-    case "$UNAME" in
+    case "${UNAME}" in
     'Darwin')
         export PKG_MGR='brew'
         export HOMEBREW_INSTALL="${HOMEBREW_INSTALL:-1}"
@@ -11,15 +11,15 @@ if [ -z ${UNAME+x} ]; then
         TARGET_OS="$(sw_vers --productName)"
         ;;
     'Linux')
-        ID="$(. /etc/os-release; printf '%s' "$ID")"
-        ID_LIKE="$(. /etc/os-release; printf '%s' "$ID_LIKE")"
+        ID="$(. /etc/os-release; printf '%s' "${ID}")"
+        ID_LIKE="$(. /etc/os-release; printf '%s' "${ID_LIKE}")"
         export NGINX_SERVERS_ROOT='/etc/nginx/conf.d/sites-available'
-        case "$ID" in
+        case "${ID}" in
         'alpine') export PKG_MGR='apk' ;;
         'debian') export PKG_MGR='apt-get' ;;
         'rhel') export PKG_MGR='dnf' ;;
         *)
-            case "$ID_LIKE" in
+            case "${ID_LIKE}" in
             *debian*) export PKG_MGR='apt-get' ;;
             *rhel*) export PKG_MGR='dnf' ;;
             *) ;;
@@ -27,7 +27,7 @@ if [ -z ${UNAME+x} ]; then
         ;;
         esac
 
-        case "$PKG_MGR" in
+        case "${PKG_MGR}" in
         'apk')
             TARGET_OS='alpine'
             ;;
@@ -38,13 +38,13 @@ if [ -z ${UNAME+x} ]; then
             TARGET_OS='rhel'
             ;;
         *)
-            >&2 printf 'Unimplemented, package manager for %s\n' "$TARGET_OS"
+            >&2 printf 'Unimplemented, package manager for %s\n' "${TARGET_OS}"
             exit 3
             ;;
         esac
         ;;
     *)
-        >&2 printf 'Unimplemented for %s\n' "$UNAME"
+        >&2 printf 'Unimplemented for %s\n' "${UNAME}"
         exit 3
         ;;
     esac
