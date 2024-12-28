@@ -1,5 +1,10 @@
 #!/bin/sh
 
+set -v
+guard='H_'"$(realpath -- "${0}" | sed 's/[^a-zA-Z0-9_]/_/g')"
+if env | grep -qF "${guard}"; then return ; fi
+export "${guard}"=1
+
 SCRIPT_ROOT_DIR="${SCRIPT_ROOT_DIR:-$( dirname -- "$( dirname -- "$( dirname -- "${0}" )" )" )}"
 
 #DIR="$( dirname -- "$( readlink -nf -- "${0}" )")"
@@ -11,7 +16,7 @@ get_priv() {
       true;
     elif [ "$(id -u)" = "0" ]; then
       PRIV='';
-    elif command -v sudo 2>/dev/null; then
+    elif cmd_avail sudo; then
       PRIV='sudo';
     else
       >&2 echo "Error: This script must be run as root or with sudo privileges."
@@ -30,5 +35,5 @@ ensure_available() {
 }
 
 cmd_avail() {
-  command -v "${1}" 2>/dev/null
+  command -v "${1}" >/dev/null 2>&1
 }

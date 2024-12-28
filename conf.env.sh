@@ -1,5 +1,10 @@
 #!/bin/sh
 
+set -v
+guard='H_'"$(realpath -- "${0}" | sed 's/[^a-zA-Z0-9_]/_/g')"
+if env | grep -qF "${guard}"; then return ; fi
+export "${guard}"=1
+
 export BUILD_DIR="${BUILD_DIR:-./build}"
 
 export RUST_INSTALL="${RUST_INSTALL:-1}"
@@ -41,3 +46,5 @@ export JUPYTER_NOTEBOOK_VENV="${JUPYTER_NOTEBOOK_VENV:-/opt/venvs/jupyter-${PYTH
 
 export FACESWAPPER_INSTALL="${FACESWAPPER_INSTALL:-1}"
 export FACESWAPPER_VENV="${FACESWAPPER_VENV:-/opt/venvs/swap-${PYTHON_VERSION}}"
+
+export SERVE_REPLICA_INSTALL="${SERVE_REPLICA_INSTALL:-1}"

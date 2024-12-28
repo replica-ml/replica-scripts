@@ -1,5 +1,9 @@
 #!/bin/sh
 
+set -v
+guard='H_'"$(realpath -- "${0}" | sed 's/[^a-zA-Z0-9_]/_/g')"
+if env | grep -qF "${guard}"; then return ; fi
+export "${guard}"=1
 export DEBIAN_FRONTEND='noninteractive'
 
 get_priv() {
@@ -7,7 +11,7 @@ get_priv() {
       true;
     elif [ "$(id -u)" = "0" ]; then
       PRIV='';
-    elif command -v sudo 2>/dev/null; then
+    elif command -v sudo >/dev/null 2>&1; then
       PRIV='sudo';
     else
       >&2 echo "Error: This script must be run as root or with sudo privileges."

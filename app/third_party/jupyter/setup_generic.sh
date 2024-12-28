@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -v
+
 if [ -n "${ZSH_VERSION}" ] || [ -n "${BASH_VERSION}" ]; then
   set -euo pipefail
 fi
@@ -7,23 +9,21 @@ fi
 DIR="$( dirname -- "${0}" )"
 SCRIPT_ROOT_DIR="${SCRIPT_ROOT_DIR:-$( dirname -- "$( dirname -- "$( dirname -- "${0}" )" )" )}"
 
-"${SCRIPT_ROOT_DIR}"'/conf.env.sh'
-
 # shellcheck disable=SC1091
 . "${SCRIPT_ROOT_DIR}"'/conf.env.sh'
 
 # shellcheck disable=SC1091
 . "${DIR}"'/conf.env.sh'
 
-  # shellcheck disable=SC1091
-  . "${SCRIPT_ROOT_DIR}"'/_lib/_common/common.sh'
+# shellcheck disable=SC1091
+. "${SCRIPT_ROOT_DIR}"'/_lib/_common/common.sh'
 
-#if ! cmd_avail python; then
+if [ ! -d "${JUPYTER_NOTEBOOK_VENV}" ]; then
   # shellcheck disable=SC1091
   . "${SCRIPT_ROOT_DIR}"'/_lib/_toolchain/python/setup.sh'
-#fi
 
-[ -d "${JUPYTER_NOTEBOOK_VENV}" ] || uv venv --python "${PYTHON_VERSION}" "${JUPYTER_NOTEBOOK_VENV}"
+  uv venv --python "${PYTHON_VERSION}" "${JUPYTER_NOTEBOOK_VENV}"
+fi
 
 get_priv
 
@@ -31,7 +31,9 @@ get_priv
 "${PRIV}" chown -R "${JUPYTER_NOTEBOOK_SERVICE_USER}":"${JUPYTER_NOTEBOOK_SERVICE_GROUP}" "${JUPYTER_NOTEBOOK_DIR}" "${JUPYTER_NOTEBOOK_VENV}"
 
 if [ -d '/etc/systemd/system' ]; then
-  [ -d '/home/'"${JUPYTER_NOTEBOOK_SERVICE_USER}"'/' ] || adduser "${JUPYTER_NOTEBOOK_SERVICE_USER}" --home '/home/'"${JUPYTER_NOTEBOOK_SERVICE_USER}"'/' --gecos ''
+  if [ -d '/home/'"${JUPYTER_NOTEBOOK_SERVICE_USER}"'/' ]; then
+    adduser "${JUPYTER_NOTEBOOK_SERVICE_USER}" --home '/home/'"${JUPYTER_NOTEBOOK_SERVICE_USER}"'/' --gecos ''
+  fi
 
   service_name='jupyter_notebook'"${JUPYTER_NOTEBOOK_IP}"'_'"${JUPYTER_NOTEBOOK_PORT}"
   service='/etc/systemd/system/'"${service_name}"'.service'

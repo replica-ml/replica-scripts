@@ -1,9 +1,9 @@
 #!/bin/sh
 
+set -v
 if [ -n "${ZSH_VERSION}" ] || [ -n "${BASH_VERSION}" ]; then
   set -veuo pipefail
 fi
-
 DIR="$( dirname -- "${0}" )"
 export DIR
 
